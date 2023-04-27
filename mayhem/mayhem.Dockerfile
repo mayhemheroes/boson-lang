@@ -12,7 +12,7 @@ RUN cd boson && cargo +nightly fuzz build
 FROM ubuntu:latest AS PACKAGE
 
 # Copy the corpora to the final image
-COPY --from=BUILDER /src/mayhem/corpus /corpus/programs
+COPY --from=BUILDER /src/examples /corpus/programs
 
 # Copy the fuzzers to the final image
 COPY --from=BUILDER /src/boson/fuzz/target/x86_64-unknown-linux-gnu/release/fuzz_* /fuzzers/
