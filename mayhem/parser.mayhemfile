@@ -1,0 +1,9 @@
+project: boson
+target: parser
+duration: 600
+cmds:
+    - cmd: /fuzzers/fuzz_parser
+      timeout: 1
+      env: { "MAYHEM_TIMEOUTS_AS_DEFECTS": "1"}
+testsuite:
+    - file:///corpus/programs

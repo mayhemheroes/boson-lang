@@ -3,6 +3,7 @@
 use libfuzzer_sys::fuzz_target;
 
 use boson::lexer::LexerAPI;
+use boson::parser::Parser;
 
 fuzz_target!(|data: &[u8]| {
     let vec = data.to_vec();
@@ -11,5 +12,8 @@ fuzz_target!(|data: &[u8]| {
         return;
     }
 
-    let _ = LexerAPI::new_from_buffer(vec);
+    let lexer = LexerAPI::new_from_buffer(vec);
+    let mut parser = Parser::new_from_lexer(lexer);
+
+    let _ = parser.parse();
 });

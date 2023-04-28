@@ -60,6 +60,8 @@ jobs:
       matrix:
         lexer_mayhemfile:
           - mayhem/lexer.mayhemfile
+        parser_mayhemfile:
+          - mayhem/parser.mayhemfile
 
     steps:
       - uses: actions/checkout@v3
@@ -70,6 +72,13 @@ jobs:
         with:
           mayhem-token: ${{ secrets.MAYHEM_TOKEN }}
           args: --image ${{ needs.build.outputs.image }} --file ${{ matrix.lexer_mayhemfile }} --duration 600
+          sarif-output: sarif
+
+      - name: Start analysis for ${{ matrix.parser_mayhemfile }}
+        uses: ForAllSecure/mcode-action@v1
+        with:
+          mayhem-token: ${{ secrets.MAYHEM_TOKEN }}
+          args: --image ${{ needs.build.outputs.image }} --file ${{ matrix.parser_mayhemfile }} --duration 600
           sarif-output: sarif
 
       - name: Upload SARIF file(s)
