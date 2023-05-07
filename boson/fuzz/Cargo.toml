@@ -1,0 +1,28 @@
+[package]
+name = "fuzz_boson"
+version = "0.0.0"
+authors = ["Automatically generated"]
+publish = false
+edition = "2018"
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+boson = { path = ".." }
+libfuzzer-sys = "0.4.0"
+
+[workspace]
+members = ["."]
+
+[[bin]]
+name = "fuzz_lexer"
+path = "fuzz_targets/lexer.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "fuzz_parser"
+path = "fuzz_targets/parser.rs"
+test = false
+doc = false
