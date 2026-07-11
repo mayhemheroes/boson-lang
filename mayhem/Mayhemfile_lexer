@@ -1,0 +1,12 @@
+# Mayhem target: the boson lexer (boson::lexer::LexerAPI::new_from_buffer tokenizes attacker
+# bytes), built by mayhem/build.sh via cargo-fuzz as a libFuzzer binary at /mayhem/fuzz_lexer.
+# Target name `lexer` preserved from the old fork for Mayhem corpus/defect continuity.
+# Seeds live in mayhem/testsuite/lexer/ (bootstrap only — no pinned `testsuite:`; issue #124).
+project: boson
+target: lexer
+cmds:
+  - cmd: /mayhem/fuzz_lexer
+    libfuzzer: true
+testsuite:
+  - https://$MAYHEM_DOMAIN/$MAYHEM_PROJECT/$MAYHEM_TARGET/testsuite.tar
+  - file://mayhem/lexer/testsuite

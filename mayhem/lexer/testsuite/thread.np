@@ -1,0 +1,13 @@
+
+func print_periodic(name) {
+    while (true) {
+        println("Hello, world from ", name);
+        sleep_sec(3);
+    }
+}
+
+const th1 = thread print_periodic("thread1");
+const th2 = thread print_periodic("thread2");
+
+wait(th1)
+wait(th2)

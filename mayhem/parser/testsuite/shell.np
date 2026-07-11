@@ -1,0 +1,19 @@
+
+
+func count_files() {
+    const res = $ "ls | wc -l";
+    return int(res[1]);
+}
+
+println(count_files());
+
+func count_occurences(file, pattern) {
+    const res = $ "cat "+file+" | grep -c "+pattern; 
+    return int(res[1])
+}
+
+const res = call_async(
+    count_occurences, ["LICENSE", "GPL"]
+);
+
+println(res);

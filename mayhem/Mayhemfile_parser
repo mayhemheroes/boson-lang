@@ -1,0 +1,12 @@
+# Mayhem target: the boson parser (boson::parser::Parser::parse over a LexerAPI token stream),
+# built by mayhem/build.sh via cargo-fuzz as a libFuzzer binary at /mayhem/fuzz_parser.
+# Target name `parser` preserved from the old fork for Mayhem corpus/defect continuity.
+# Seeds live in mayhem/testsuite/parser/ (bootstrap only — no pinned `testsuite:`; issue #124).
+project: boson
+target: parser
+cmds:
+  - cmd: /mayhem/fuzz_parser
+    libfuzzer: true
+testsuite:
+  - https://$MAYHEM_DOMAIN/$MAYHEM_PROJECT/$MAYHEM_TARGET/testsuite.tar
+  - file://mayhem/parser/testsuite

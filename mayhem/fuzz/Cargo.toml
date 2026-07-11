@@ -1,0 +1,36 @@
+# Additive cargo-fuzz crate for the Mayhem two-branch model.
+#
+# Ports the OLD fork's two harnesses (boson/fuzz: fuzz_lexer + fuzz_parser) into the
+# spec-v2 layout without touching any upstream file. Same entry points as the original
+# (boson::lexer::LexerAPI / boson::parser::Parser) on libfuzzer-sys 0.4. The fuzzed crate
+# `boson` is the repo's `boson/` member, one level up + into boson/ from mayhem/fuzz/.
+# Built via `cargo fuzz build --fuzz-dir mayhem/fuzz`. Own [workspace] so it is isolated
+# from the repo-root workspace (boson + modules/*).
+[package]
+name = "boson-mayhem-fuzz"
+version = "0.0.0"
+authors = ["Mayhem integration"]
+publish = false
+edition = "2018"
+
+[package.metadata]
+cargo-fuzz = true
+
+[workspace]
+members = ["."]
+
+[dependencies]
+libfuzzer-sys = "0.4"
+boson = { path = "../../boson" }
+
+[[bin]]
+name = "fuzz_lexer"
+path = "fuzz_targets/fuzz_lexer.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "fuzz_parser"
+path = "fuzz_targets/fuzz_parser.rs"
+test = false
+doc = false

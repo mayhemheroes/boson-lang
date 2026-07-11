@@ -1,0 +1,8 @@
+const x = "Hello, world";
+println(x.__address__);
+
+const d = {
+    "age": 20
+};
+
+println(d.keys()[0]);

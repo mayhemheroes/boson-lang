@@ -1,0 +1,14 @@
+
+
+func wrap_adder(x, y) {
+    const z = 30
+    func adder() {
+        return x + y + z
+    }
+
+    return adder
+}
+
+const adder = wrap_adder(10, 20)
+const result = adder()
+println(result)
